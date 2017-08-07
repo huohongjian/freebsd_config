@@ -1,0 +1,9 @@
+clipit &
+# networkmgr &
+tint2 &
+xbattbar &
+
+feh --bg-scale ~/image/lenovo.jpg
+wbar &
+
+xbrightness 58000 1.2
