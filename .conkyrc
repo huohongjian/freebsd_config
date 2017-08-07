@@ -1,0 +1,130 @@
+# This file located in ~/.conkyrc
+
+# Conky sample configuration
+#
+# the list of variables has been removed from this file in favour
+# of keeping the documentation more maintainable.
+# Check http://conky.sf.net for an up-to-date-list.
+
+# set to yes if you want Conky to be forked in the background
+
+
+############################
+# - Conky settings - #
+############################
+
+update_interval 3
+total_run_times 0
+net_avg_samples 1
+cpu_avg_samples 1
+if_up_strictness link
+
+imlib_cache_size 0
+double_buffer yes
+no_buffers yes
+
+
+##########################
+# - Text settings - #
+##########################
+
+use_xft yes
+xftfont DejaVu Sans Mono:size=10   #simsun:size=11    #DejaVu Sans Mono:size=10
+override_utf8_locale yes
+text_buffer_size 2048
+uppercase no
+
+
+####################################
+# - Window specifications - #
+####################################
+
+own_window_class Conky
+own_window yes
+own_window_type desktop     #dock    
+own_window_transparent yes
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+
+alignment top_right
+gap_x 10
+gap_y 0
+
+default_bar_size 0 5
+
+
+###############################
+# - Graphics settings - #
+###############################
+
+background no
+draw_shades yes
+draw_outline no
+draw_borders no
+draw_graph_borders yes
+
+default_shade_color 1D1D1D
+default_outline_color 1D1D1D
+default_color FFFFFF
+color1 FFFF00
+color2 FF6633
+
+
+############################## TEXT ##############################
+
+TEXT
+${voffset 60}
+${color1}${font DejaVu Sans Mono:style=Bold:size=11}SYSTEM INFOMATION${font} ${hr 1}${color}
+#######
+#######
+#######
+${voffset 8}
+HOSTNAME: ${alignr}${nodename}
+KERNEL: ${alignr}${kernel}
+UPTIME: ${alignr}${uptime}
+LOAD: ${alignr}${loadavg}
+#PROCESSES: ${alignr}${processes} (${running_processes} ACTIVE)
+#######
+#######
+#######
+${voffset 8}
+CPU: ${if_match ${acpitemp}>50}${color2}${endif}${acpitemp}°C   ${color1}${freq} MHz ${color}${alignr}${cpu}%
+${cpubar}
+RAM: $mem/$memmax ${alignr}$memperc%
+${membar}
+BAT: ${if_match "${acpiacadapter}"=="on-line"}${if_match ${battery_percent BAT0}>98}charged${else}${color1}charging...${endif}${else}${battery_time BAT0}${endif}${color}${alignr}${battery_percent BAT0}%
+${if_match ${battery_percent BAT0}>75}${color}${else}${if_match ${battery_percent BAT0}<20}${color #960000}${else}${color #969600}${endif}${endif}${battery_bar BAT0}${color}
+#SWAP: $swap/$swapmax ${alignr}$swapperc%
+#${swapbar}
+#######
+#######
+#######
+${voffset 8}
+${color1}PROCESSES${color}(${running_processes}/${processes})${color1}${alignr}CPU%${color}↓${color1} MEM%${color}
+${voffset -5}${color2}${hr 2}${color}
+${top name 1}${alignr}${top cpu 1}${top mem 1}
+${top name 2}${alignr}${top cpu 2}${top mem 2}
+${top name 3}${alignr}${top cpu 3}${top mem 3}
+${top name 4}${alignr}${top cpu 4}${top mem 4}
+${top name 5}${alignr}${top cpu 5}${top mem 5}
+#######
+#######
+#######
+${voffset 8}
+#SSID: ${if_match "${wireless_link_qual_perc wlan0}"!="unk"}${color1}${wireless_essid wlan0}${color} ${alignr}${wireless_link_qual_perc wlan0}%${endif} ${color2}${wireless_link_bar 2 wlan0}${color} # linux only
+WLAN: ${if_match "${wireless_link_qual_perc wlan0}"!="unk"}${alignr}${addr wlan0}${endif}
+${voffset -3}${downspeedgraph wlan0 20,108 00ff00 0000ff}${alignr}${upspeedgraph wlan0 20,108 0000ff 00ff00}
+${voffset -27}${if_match "${downspeedf wlan0}"!="0.0"}${offset 5}${color1}↓${offset 3}${color}${downspeedf wlan0}K/S${endif}
+${voffset -15}${if_match "${upspeedf wlan0}"!="0.0"}${offset 120}${color1}↑${offset 3}${color}${upspeedf wlan0}K/S${endif}
+${voffset 12}LAN:${if_match "${addrs eth0}"!="0.0.0.0"}${alignr}${addr eth0}${endif}
+${voffset -3}${downspeedgraph eth0 20,108 00ff00 0000ff}${alignr}${upspeedgraph eth0 20,108 0000ff 00ff00}
+${voffset -27}${if_match "${downspeedf eth0}"!="0.0"}${offset 5}${color1}↓${offset 3}${color}${downspeedf eth0}K/S${endif}
+${voffset -15}${if_match "${downspeedf eth0}"!="0.0"}${offset 120}${color1}↑${offset 3}${color}${upspeedf eths0}K/S${endif}
+#######
+#######
+#######
+${voffset 12}
+ROOT: ${fs_free /}/${fs_size /}${alignr}${fs_free_perc /}%
+${fs_bar /}
+${if_match "${fs_size /}"=="${fs_size /mnt}"}HOME: ${fs_free /home}/${fs_size /home}${alignr}${fs_free_perc /home}%${else}MNT: ${fs_free /mnt}/${fs_size /mnt}${alignr}${fs_free_perc /mnt}%${endif}
+${if_match "${fs_size /}"=="${fs_size /mnt}"}${fs_bar /home}${else}${fs_bar /mnt}${endif}
+
