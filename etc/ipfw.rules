@@ -1,0 +1,2 @@
+ipfw add allow all from any to any
+ipfw add divert natd ip from any to any via fxp0
